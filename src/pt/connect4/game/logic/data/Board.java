@@ -1,7 +1,9 @@
-package pt.connect4.game.logic;
+package pt.connect4.game.logic.data;
 
 
 import pt.connect4.game.Constants;
+
+import java.util.ArrayList;
 
 public class Board {
 
@@ -9,6 +11,8 @@ public class Board {
     private static final int numOfColumns = Constants.NUM_OF_COLUMNS;
     private static final int inARow = Constants.IN_A_ROW;
     private final int[][] gameBoard;
+
+    private ArrayList<Move> lastMoves = new ArrayList<>();
 
     public Board() {
         gameBoard = new int[numOfRows][numOfColumns];

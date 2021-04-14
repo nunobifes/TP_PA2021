@@ -1,6 +1,6 @@
 package pt.connect4;
 
-import pt.connect4.game.logic.Board;
+import pt.connect4.game.logic.data.Board;
 
 public class Main {
     public static void main(String[] args) throws Exception {
