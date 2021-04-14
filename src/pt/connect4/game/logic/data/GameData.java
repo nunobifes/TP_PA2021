@@ -1,5 +1,6 @@
 package pt.connect4.game.logic.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameData {
@@ -10,6 +11,7 @@ public class GameData {
     private Player player2;
 
     public GameData() {
+        msgLog = new ArrayList<>();
         board = new Board();
         initialize();
     }
@@ -46,4 +48,7 @@ public class GameData {
         this.player2 = player2;
     }
 
+    public Board getBoard() {
+        return board;
+    }
 }

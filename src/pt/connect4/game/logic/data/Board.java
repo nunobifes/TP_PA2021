@@ -22,7 +22,7 @@ public class Board {
         return gameBoard;
     }
 
-    public void printBoard(int[][] gameBoard) {
+    public void printBoard() {
         System.out.println("| 1 | 2 | 3 | 4 | 5 | 6 | 7 |");
         System.out.println();
         for (int i = 0; i < numOfRows; i++) {

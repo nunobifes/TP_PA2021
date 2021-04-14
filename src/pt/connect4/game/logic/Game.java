@@ -1,5 +1,6 @@
 package pt.connect4.game.logic;
 
+import pt.connect4.game.logic.data.Board;
 import pt.connect4.game.logic.data.GameData;
 import pt.connect4.game.logic.states.IStates;
 import pt.connect4.game.logic.states.Settings;
@@ -14,4 +15,9 @@ public class Game {
         gameData = new GameData();
         state = new Settings(gameData);
     }
+
+    public Board getBoard(){
+        return gameData.getBoard();
+    }
+
 }
