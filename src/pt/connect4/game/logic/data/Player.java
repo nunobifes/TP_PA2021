@@ -1,16 +1,11 @@
 package pt.connect4.game.logic.data;
 
-import java.util.ArrayList;
+public abstract class Player {
 
-public class Player {
+    String name;
+    int nSpecialPiece;
+    int nCredits;
 
-    private String name;
-    private int nSpecialPiece;
-    private int nCredits;
-
-    public Player(String name) {
-        this.name = name;
-        nSpecialPiece = 0;
-        nCredits = 5;
+    public Player() {
     }
 }

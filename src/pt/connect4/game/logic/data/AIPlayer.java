@@ -1,10 +1,10 @@
 package pt.connect4.game.logic.data;
 
-public class PlayerAI {
+public class AIPlayer extends Player {
 
     private String name;
 
-    public PlayerAI(){
+    public AIPlayer(){
         name = "AIBot";
     }
 }
