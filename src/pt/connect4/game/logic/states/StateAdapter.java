@@ -1,6 +1,7 @@
 package pt.connect4.game.logic.states;
 
 import pt.connect4.game.logic.data.GameData;
+import pt.connect4.game.logic.data.Player;
 
 public abstract class StateAdapter implements IStates{
 
@@ -20,5 +21,10 @@ public abstract class StateAdapter implements IStates{
     {
         this.g = gameData;
     }
+    public IStates start(int option, String name1, String name2) { return this;}
 
+    @Override
+    public IStates playPiece(Player player, int col, boolean special) {
+        return this;
+    }
 }

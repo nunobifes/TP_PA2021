@@ -10,39 +10,85 @@ public class Board {
     private static final int numOfRows = Constants.NUM_OF_ROWS;
     private static final int numOfColumns = Constants.NUM_OF_COLUMNS;
     private static final int inARow = Constants.IN_A_ROW;
-    private final int[][] gameBoard;
 
-    private ArrayList<Move> lastMoves = new ArrayList<>();
+    private final ArrayList<ArrayList<Piece>> gameBoard;
+    private ArrayList<Piece> lastMoves;
 
     public Board() {
-        gameBoard = new int[numOfRows][numOfColumns];
+        gameBoard = initializeGameBoard();
+        lastMoves = new ArrayList<>();
     }
 
-    public int[][] getGameBoard() {
+    private ArrayList<ArrayList<Piece>> initializeGameBoard(){
+        ArrayList<ArrayList<Piece>> aux = new ArrayList<>();
+        for (int i = 0; i < numOfRows; i++) {
+            ArrayList<Piece> row = new ArrayList<>();
+            for (int j = 0; j < numOfColumns; j++) {
+                row.add(null);
+            }
+            aux.add(row);
+        }
+        return aux;
+    }
+
+    public ArrayList<ArrayList<Piece>> getGameBoard() {
         return gameBoard;
     }
 
-    public void printBoard() {
-        System.out.println("| 1 | 2 | 3 | 4 | 5 | 6 | 7 |");
-        System.out.println();
+    public void removePiece(Pos pos){
+        gameBoard.get(pos.getRow()).set(pos.getColumn(), null);
+    }
+
+    public void removeColumn(int col){
         for (int i = 0; i < numOfRows; i++) {
+            removePiece(new Pos(i, col));
+        }
+    }
+
+    public void newPiece(Player player, int col, boolean special){
+        int i = numOfRows-1;
+        while (i >= 0){
+            ArrayList<Piece> row = gameBoard.get(i);
+            if(row.get(col) == null){
+                Piece piece = new Piece(new Pos(i, col), player, special);
+                row.set(col, piece);
+                lastMoves.add(piece);
+                if(special)
+                    removeColumn(col);
+                break;
+            }
+            i--;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\t\t\t\t\t| 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n");
+        sb.append("\n");
+        for (int i = 0; i < numOfRows; i++) {
+            sb.append("\t\t\t\t\t");
+            ArrayList<Piece> row = gameBoard.get(i);
             for (int j = 0; j < numOfColumns; j++) {
+                Piece piece = row.get(j);
                 if (j != numOfColumns - 1) {
-                    if (gameBoard[i][j] != 0) {
-                        System.out.print("| " + gameBoard[i][j] + " ");
+                    if (piece != null) {
+                        sb.append("| " + piece.getPlayer().getIdentifier() + " ");
                     } else {
-                        System.out.print("| " + "-" + " ");
+                        sb.append("| " + "-" + " ");
                     }
                 } else {
-                    if (gameBoard[i][j] != 0) {
-                        System.out.println("| " + gameBoard[i][j] + " |");
+                    if (piece != null) {
+                        sb.append("| " + piece.getPlayer().getIdentifier() + " |\n");
                     } else {
-                        System.out.println("| " + "-" + " |");
+                        sb.append("| " + "-" + " |\n");
                     }
                 }
             }
         }
-        System.out.println("\n*****************************");
+        sb.append("\n\t\t\t\t\t*****************************");
+        return sb.toString();
     }
 
 }

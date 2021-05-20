@@ -16,7 +16,7 @@ public class CircularIterator<T> implements Iterator<T> {
 
     public CircularIterator (List<T> list){
         _internalList = list;
-        _currentIndex = -1;
+        _currentIndex = 0;
     }
 
     @Override
