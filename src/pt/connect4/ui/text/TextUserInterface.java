@@ -74,6 +74,7 @@ public class TextUserInterface {
 
     private void printPlayMenu() {
         int col;
+        boolean flag = false;
         System.out.println();
         showGame();
         System.out.println();
@@ -85,16 +86,22 @@ public class TextUserInterface {
             sc.next();
 
         op = sc.nextInt();
-        System.out.print("\nColumn: ");
-        while(!sc.hasNextInt())
-            sc.next();
 
-        col = sc.nextInt();
+        do{
+            System.out.print("\nColumn: ");
+            while(!sc.hasNextInt())
+                sc.next();
+
+            col = sc.nextInt();
+
+            if(g.fullColumn(col))
+                System.out.println("\nERROR: The selected column is full, try another.");
+            else
+                flag = true;
+
+        }while (!flag);
 
         g.newPiece(op, col);
-
-
-
 
 
     }

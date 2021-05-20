@@ -10,6 +10,7 @@ public class GameData {
     private List<String> msgLog;
     private Board board;
     private Player currentPlayer;
+    private Player winner;
     private ArrayList<Player> players;
     private CircularIterator<Player> ciPlayer;
     private int turn;
@@ -72,6 +73,19 @@ public class GameData {
         sb.append("\tCurrent Player: " + currentPlayer + "\tTurn: " + turn + "\n\n");
         sb.append(board);
         return sb.toString();
+    }
+
+    public boolean fullColumn(int col) {
+        return board.fullColumn(col);
+    }
+
+    public boolean checkWinState(){
+        int timesInARow = board.countInARow(currentPlayer);
+        if(timesInARow > 0) {
+            winner = currentPlayer;
+            return true;
+        }
+        return false;
     }
 
 }

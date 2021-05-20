@@ -64,4 +64,8 @@ public class Game {
             state = state.playPiece(gameData.getCurrentPlayer(), col, true);
         }
     }
+
+    public boolean fullColumn(int col) {
+        return gameData.fullColumn(col);
+    }
 }

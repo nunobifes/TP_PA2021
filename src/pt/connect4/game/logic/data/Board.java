@@ -91,4 +91,69 @@ public class Board {
         return sb.toString();
     }
 
+    public boolean fullColumn(int col) {
+        if(gameBoard.get(0).get(col) != null)
+            return true;
+        return false;
+    }
+
+    private boolean canMove(int row, int col) {
+        if ((row <= -1) || (col <= -1) || (row > numOfRows-1) || (col > numOfColumns-1)) {
+            return false;
+        }
+        return true;
+    }
+
+    public int countInARow(Player player){
+        int times = 0;
+
+        // checks inARow consecutive pieces of the same player horizontally
+        for(int i = 0; i < numOfRows; i++){
+            for (int j = 0; j < numOfColumns; j++) {
+                if(canMove(i, j+inARow-1)) {
+                    int k = 0;
+                    while (k < inARow && gameBoard.get(i).get(j + k).getPlayer().equals(player))
+                        k++;
+                    if (k == inARow) times++;
+                }
+            }
+        }
+
+        // checks inARow consecutive pieces of the same player vertically
+        for(int i = 0; i < numOfRows; i++){
+            for (int j = 0; j < numOfColumns; j++) {
+                if(canMove(i-inARow+1, j)) {
+                    int k = 0;
+                    while (k < inARow && gameBoard.get(i-k).get(j).getPlayer().equals(player))
+                        k++;
+                    if (k == inARow) times++;
+                }
+            }
+        }
+
+        // checks inARow consecutive pieces of the same player in descending diagonal
+        for(int i = 0; i < numOfRows; i++){
+            for (int j = 0; j < numOfColumns; j++) {
+                if(canMove(i+inARow-1, j+inARow-1)) {
+                    int k = 0;
+                    while (k < inARow && gameBoard.get(i+k).get(j+k).getPlayer().equals(player))
+                        k++;
+                    if (k == inARow) times++;
+                }
+            }
+        }
+
+        // checks inARow consecutive pieces of the same player in ascending diagonal
+        for(int i = 0; i < numOfRows; i++){
+            for (int j = 0; j < numOfColumns; j++) {
+                if(canMove(i-inARow+1, j+inARow-1)) {
+                    int k = 0;
+                    while (k < inARow && gameBoard.get(i-k).get(j+k).getPlayer().equals(player))
+                        k++;
+                    if (k == inARow) times++;
+                }
+            }
+        }
+        return times;
+    }
 }
