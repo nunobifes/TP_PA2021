@@ -2,6 +2,7 @@ package pt.connect4.game.logic;
 
 import pt.connect4.game.logic.data.Board;
 import pt.connect4.game.logic.data.GameData;
+import pt.connect4.game.logic.data.HumanPlayer;
 import pt.connect4.game.logic.states.*;
 
 import java.util.List;
@@ -67,5 +68,16 @@ public class Game {
 
     public boolean fullColumn(int col) {
         return gameData.fullColumn(col);
+    }
+
+    public String getWinner(){ return gameData.getWinner().getName();}
+
+    public void restartGame(){
+        gameData = new GameData();
+        state = new Settings(gameData);
+    }
+
+    public boolean isHumanPlayer(){
+        return gameData.getCurrentPlayer() instanceof HumanPlayer;
     }
 }

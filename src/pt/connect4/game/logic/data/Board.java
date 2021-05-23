@@ -112,7 +112,7 @@ public class Board {
             for (int j = 0; j < numOfColumns; j++) {
                 if(canMove(i, j+inARow-1)) {
                     int k = 0;
-                    while (k < inARow && gameBoard.get(i).get(j + k).getPlayer().equals(player))
+                    while (k < inARow && gameBoard.get(i).get(j + k) != null && gameBoard.get(i).get(j + k).getPlayer().equals(player))
                         k++;
                     if (k == inARow) times++;
                 }
@@ -124,7 +124,7 @@ public class Board {
             for (int j = 0; j < numOfColumns; j++) {
                 if(canMove(i-inARow+1, j)) {
                     int k = 0;
-                    while (k < inARow && gameBoard.get(i-k).get(j).getPlayer().equals(player))
+                    while (k < inARow && gameBoard.get(i-k).get(j) != null && gameBoard.get(i-k).get(j).getPlayer().equals(player))
                         k++;
                     if (k == inARow) times++;
                 }
@@ -136,7 +136,7 @@ public class Board {
             for (int j = 0; j < numOfColumns; j++) {
                 if(canMove(i+inARow-1, j+inARow-1)) {
                     int k = 0;
-                    while (k < inARow && gameBoard.get(i+k).get(j+k).getPlayer().equals(player))
+                    while (k < inARow && gameBoard.get(i+k).get(j+k) != null && gameBoard.get(i+k).get(j+k).getPlayer().equals(player))
                         k++;
                     if (k == inARow) times++;
                 }
@@ -148,7 +148,7 @@ public class Board {
             for (int j = 0; j < numOfColumns; j++) {
                 if(canMove(i-inARow+1, j+inARow-1)) {
                     int k = 0;
-                    while (k < inARow && gameBoard.get(i-k).get(j+k).getPlayer().equals(player))
+                    while (k < inARow && gameBoard.get(i-k).get(j+k) != null && gameBoard.get(i-k).get(j+k).getPlayer().equals(player))
                         k++;
                     if (k == inARow) times++;
                 }
@@ -156,4 +156,16 @@ public class Board {
         }
         return times;
     }
+
+
+    public boolean boardIsFull(){
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < numOfColumns; j++) {
+                if(gameBoard.get(i).get(j) == null)
+                    return false;
+            }
+        }
+        return true;
+    }
+
 }

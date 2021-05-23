@@ -5,6 +5,7 @@ import pt.connect4.game.logic.data.AIPlayer;
 import pt.connect4.game.logic.data.GameData;
 import pt.connect4.game.logic.data.HumanPlayer;
 import pt.connect4.game.logic.data.Player;
+import pt.connect4.utils.XORShiftRandom;
 
 import java.util.Random;
 
@@ -49,7 +50,8 @@ public class Settings extends StateAdapter{
    }
 
    private void addPlayers(GameData gd, Player p1, Player p2){
-       if(rand.nextInt(1) < 1) {
+        XORShiftRandom xsr = new XORShiftRandom(2);
+       if(xsr.nextInt() < 1) {
            gd.addMsgLog("Player " + p1.getName() + " is the first to play!");
            gd.addPlayer(p1);
            gd.addPlayer(p2);

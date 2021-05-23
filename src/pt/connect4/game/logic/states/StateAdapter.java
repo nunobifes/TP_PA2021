@@ -22,8 +22,7 @@ public abstract class StateAdapter implements IStates{
         this.g = gameData;
     }
     public IStates start(int option, String name1, String name2) { return this;}
-
-    @Override
+    public IStates restartGame() {return this;};
     public IStates playPiece(Player player, int col, boolean special) {
         return this;
     }

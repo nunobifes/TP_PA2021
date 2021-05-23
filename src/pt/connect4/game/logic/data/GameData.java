@@ -1,5 +1,6 @@
 package pt.connect4.game.logic.data;
 
+import pt.connect4.game.Constants;
 import pt.connect4.utils.CircularIterator;
 
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class GameData {
         return board.fullColumn(col);
     }
 
-    public boolean checkWinState(){
+    private boolean checkWinState(){
         int timesInARow = board.countInARow(currentPlayer);
         if(timesInARow > 0) {
             winner = currentPlayer;
@@ -88,4 +89,28 @@ public class GameData {
         return false;
     }
 
+    public boolean checkGameOver(){
+        if(checkWinState())
+            return true;
+
+        return checkDraw();
+    }
+
+    private boolean checkDraw() {
+        if(board.boardIsFull())
+            return true;
+
+        return false;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public boolean itsMiniGameTime(){
+        if(turn % 8 == 0 && currentPlayer instanceof HumanPlayer)
+            return true;
+
+        return false;
+    }
 }

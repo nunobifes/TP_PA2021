@@ -12,4 +12,5 @@ public class GameOver extends StateAdapter{
     public Situation getCurrentSituation() {
         return Situation.GAME_OVER;
     }
+
 }

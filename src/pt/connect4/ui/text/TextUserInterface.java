@@ -1,6 +1,8 @@
 package pt.connect4.ui.text;
 
 import pt.connect4.game.logic.Game;
+import pt.connect4.utils.XORShiftRandom;
+
 import java.util.Scanner;
 
 
@@ -67,6 +69,17 @@ public class TextUserInterface {
     }
 
     private void printGameOverMenu() {
+        System.out.println();
+        showGame();
+        System.out.println("Winner --> " + g.getWinner() + " !");
+        System.out.println("Congratulations!");
+        System.out.println("\n\n\t\tPress enter to continue...");
+        g.restartGame();
+        try{
+            System.in.read();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void printMiniGameMenu() {
@@ -78,28 +91,36 @@ public class TextUserInterface {
         System.out.println();
         showGame();
         System.out.println();
-        System.out.println("\t\t\t1 - Play Piece \t\t2 - Play Special Piece");
+        if(g.isHumanPlayer()){
+            System.out.println("\t\t\t1 - Play Piece \t\t2 - Play Special Piece");
 
 
-        System.out.print("\n\t\tOption: ");
-        while(!sc.hasNextInt())
-            sc.next();
-
-        op = sc.nextInt();
-
-        do{
-            System.out.print("\nColumn: ");
+            System.out.print("\n\t\tOption: ");
             while(!sc.hasNextInt())
                 sc.next();
 
-            col = sc.nextInt();
+            op = sc.nextInt();
 
-            if(g.fullColumn(col))
-                System.out.println("\nERROR: The selected column is full, try another.");
-            else
-                flag = true;
+            do{
+                System.out.print("\nColumn: ");
+                while(!sc.hasNextInt())
+                    sc.next();
 
-        }while (!flag);
+                col = sc.nextInt();
+                col -= 1;
+
+                if(g.fullColumn(col))
+                    System.out.println("\nERROR: The selected column is full, try another.");
+                else
+                    flag = true;
+
+            }while (!flag);
+        } else {
+            XORShiftRandom xsr = new XORShiftRandom(7);
+            col = xsr.nextInt();
+            op = 1;
+        }
+
 
         g.newPiece(op, col);
 
@@ -134,5 +155,6 @@ public class TextUserInterface {
     private void showGame(){
         System.out.println(g);
     }
+
 }
 
