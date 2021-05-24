@@ -1,5 +1,6 @@
 package pt.connect4.ui.text;
 
+import pt.connect4.game.Constants;
 import pt.connect4.game.logic.Game;
 import pt.connect4.utils.XORShiftRandom;
 
@@ -83,6 +84,15 @@ public class TextUserInterface {
     }
 
     private void printMiniGameMenu() {
+        printMathGameMenu();
+    }
+
+    private void printMathGameMenu() {
+
+    }
+
+    private void printWordGameMenu(){
+
     }
 
     private void printPlayMenu() {
@@ -109,7 +119,9 @@ public class TextUserInterface {
                 col = sc.nextInt();
                 col -= 1;
 
-                if(g.fullColumn(col))
+                if(col > (Constants.NUM_OF_COLUMNS - 1) || col < 0)
+                    System.out.println("\nERROR: The selected column is not valid, please select a column number between 1 and 7.");
+                else if(g.fullColumn(col))
                     System.out.println("\nERROR: The selected column is full, try another.");
                 else
                     flag = true;

@@ -49,6 +49,7 @@ public class Game {
         //return gameData.getBoard();
     //}
 
+
     @Override
     public String toString() {
         return gameData.toString();
@@ -73,11 +74,13 @@ public class Game {
     public String getWinner(){ return gameData.getWinner().getName();}
 
     public void restartGame(){
-        gameData = new GameData();
-        state = new Settings(gameData);
+        state = state.restartGame();
     }
 
     public boolean isHumanPlayer(){
         return gameData.getCurrentPlayer() instanceof HumanPlayer;
     }
 }
+
+
+// mini games

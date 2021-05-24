@@ -19,14 +19,15 @@ public class GameData {
     public GameData() {
         msgLog = new ArrayList<>();
         players = new ArrayList<>();
-        board = new Board();
         initialize();
-        turn = 1;
-        ciPlayer = new CircularIterator<>(players);
     }
 
     public void initialize(){
         clearMsgLog();
+        players.clear();
+        board = new Board();
+        turn = 1;
+        ciPlayer = new CircularIterator<>(players);
     }
 
     public void clearMsgLog(){
@@ -113,4 +114,5 @@ public class GameData {
 
         return false;
     }
+
 }

@@ -24,28 +24,34 @@ public class Settings extends StateAdapter{
    public IStates start(int option, String name1, String name2){
         GameData gd = getGameData();
 
-        if (option == 1) { startPVP(gd, name1, name2); }
-        if (option == 2) { startPVE(gd, name1, name2); }
-        if (option == 3) { startEVE(gd, name1, name2); }
+        if (option == 1) { startPVP(gd, name1, name2); gd.addMsgLog("Started PVP match");}
+        if (option == 2) { startPVE(gd, name1, name2); gd.addMsgLog("Started PVE match");}
+        if (option == 3) { startEVE(gd, name1, name2); gd.addMsgLog("Started EVE match");}
 
         return new Play(gd);
    }
 
    private void startPVP(GameData gd, String name1, String name2){
         Player p1 = new HumanPlayer(name1);
+        gd.addMsgLog("Player " + name1 + " created");
         Player p2 = new HumanPlayer(name2);
+        gd.addMsgLog("Player " + name2 + " created");
         addPlayers(gd, p1, p2);
    }
 
    private void startPVE(GameData gd, String name1, String name2){
        Player p1 = new HumanPlayer(name1);
+       gd.addMsgLog("Player " + name1 + " created");
        Player p2 = new AIPlayer(name2);
+       gd.addMsgLog("Player " + name2 + " created");
        addPlayers(gd, p1, p2);
    }
 
    private void startEVE(GameData gd, String name1, String name2){
        Player p1 = new AIPlayer(name1);
+       gd.addMsgLog("Player " + name1 + " created");
        Player p2 = new AIPlayer(name2);
+       gd.addMsgLog("Player " + name2 + " created");
        addPlayers(gd, p1, p2);
    }
 

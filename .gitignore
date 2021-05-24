@@ -10,6 +10,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 *.pdf
+*.jpg
+*.docx
 
 # Generated files
 .idea/**/contentModel.xml

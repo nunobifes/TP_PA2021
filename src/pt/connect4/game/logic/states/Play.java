@@ -19,16 +19,11 @@ public class Play extends StateAdapter{
     public IStates playPiece(Player player, int col, boolean special) {
         GameData gd = getGameData();
 
-        if(gd.itsMiniGameTime()){
-            XORShiftRandom xsr = new XORShiftRandom(2);
-            if(xsr.nextInt() > 1)
-                return new MathGame(gd);
-            else
-                return new WordGame(gd);
-        }
-
-
         gd.newPiece(player, col, special);
+        if(!special)
+            gd.addMsgLog("Player " + player.getName() + " played a piece on column: " + col);
+        else
+            gd.addMsgLog("Player " + player.getName() + " played a special piece on column: " + col);
 
         // checks if game is over
         if(gd.checkGameOver())
@@ -36,6 +31,11 @@ public class Play extends StateAdapter{
 
         gd.incTurn();
         gd.incPlayer();
+
+        // not implemented
+        /*if(gd.itsMiniGameTime()){
+            return new MiniGame(gd);
+        }*/
 
         return new Play(gd);
     }

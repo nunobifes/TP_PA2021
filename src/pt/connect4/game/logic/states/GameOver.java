@@ -13,4 +13,12 @@ public class GameOver extends StateAdapter{
         return Situation.GAME_OVER;
     }
 
+    public IStates restartGame(){
+        GameData gd = getGameData();
+
+        gd.initialize();
+
+        return new Settings(gd);
+    }
+
 }
